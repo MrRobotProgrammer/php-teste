@@ -7,7 +7,8 @@ use Alura\Leilao\Model\Leilao;
 
 class Avaliador
 {
-    private $maiorLance = 0;
+    private $maiorLance = -INF;
+    private $menorValor = INF;
 
     public function avaliar(Leilao $leilao): void
     {
@@ -15,11 +16,31 @@ class Avaliador
             if($lance->getValor() > $this->maiorLance) {
                 $this->maiorLance = $lance->getValor();
             }
+            
+            if($lance->getValor() < $this->menorValor) {
+                $this->menorValor = $lance->getValor();
+
+            }
         }
     }
 
+    /**Undocumented functionUndocumented function
+     * Retorna maior valor do lance
+     *
+     * @return float
+     */
     public function getMaiorLance(): float
     {
         return $this->maiorLance;
     }
+
+    /**
+     * Retorna menor valor do lance
+     *
+     * @return float
+     */
+    public function getMenorValor(): float 
+    {
+		return $this->menorValor;
+	}
 }
