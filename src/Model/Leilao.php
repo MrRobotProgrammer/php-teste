@@ -16,7 +16,7 @@ class Leilao
         $this->lances = [];
     }
 
-    public function recebeLance(Lance $lance)
+    public function recebeLance(Lance $lance): void
     {
         $this->lances[] = $lance;
     }

@@ -7,13 +7,15 @@ use Alura\Leilao\Model\Leilao;
 
 class Avaliador
 {
-    private $maiorLance;
+    private $maiorLance = 0;
 
     public function avaliar(Leilao $leilao): void
     {
-        $lance = $leilao->getLances();
-        $ultimoValor = $lance[count($lance) - 1];
-        $this->maiorLance = $ultimoValor->getValor();
+        foreach($leilao->getLances() as $lance) {
+            if($lance->getValor() > $this->maiorLance) {
+                $this->maiorLance = $lance->getValor();
+            }
+        }
     }
 
     public function getMaiorLance(): float
