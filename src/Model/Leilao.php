@@ -6,6 +6,7 @@ class Leilao
 {
     /** @var Lance[] */
     private $lances;
+    
     /** @var string */
     private $descricao;
 
