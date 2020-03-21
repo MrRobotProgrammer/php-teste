@@ -13,3 +13,13 @@
     -   A tarefa do teste é dar um feedback rápido e claro sobre a corretude do nosso código.
     
     ************************************************************************************************
+- branch "phpUnit-test"
+
+    -   O PHPUnit é uma ferramenta para executar testes de maneira automatizada
+    -   O executável do PHPUnit se encontra na pasta vendor/bin
+    -   Para escrever um teste com PHPUnit, devemos criar uma classe de teste
+    -   Uma classe de teste segue algumas regras:
+        *   Começa com o nome da classe que está sendo testada e usa o sufixo Test, por exemplo: AvaliadorTest, em geral ClasseASerTestadaTest
+        *   A classe de teste deve estender a classe TestCase
+        *   O método de teste deve começa com test
+        *   O método de teste deve ter um nome que diz o que estamos testando
