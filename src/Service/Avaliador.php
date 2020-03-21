@@ -2,26 +2,22 @@
 
 namespace Alura\Leilao\Service;
 
+use Alura\Leilao\Model\Lance;
 use Alura\Leilao\Model\Leilao;
 
 class Avaliador
 {
-    private $maiorValor;
+    private $maiorLance;
 
-    public function avalia(Leilao $leilao): void
+    public function avaliar(Leilao $leilao): void
     {
-        $lances = $leilao->getLances();
-        $ultimoLance = $lances[count($lances) - 1];
-        $this->maiorValor = $ultimoLance->getValor();
+        $lance = $leilao->getLances();
+        $ultimoValor = $lance[count($lance) - 1];
+        $this->maiorLance = $ultimoValor->getValor();
     }
 
-    /**
-     * Undocumented function
-     *
-     * @return float
-     */
-    public function getMaiorValor(): float
+    public function getMaiorLance(): float
     {
-        return $this->maiorValor;
+        return $this->maiorLance;
     }
 }
