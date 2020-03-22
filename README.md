@@ -22,3 +22,13 @@
         *   A classe de teste deve estender a classe TestCase
         *   O método de teste deve começa com test
         *   O método de teste deve ter um nome que diz o que estamos testando
+
+************************************************************************************************
+- branch "[classes-de-equivalencia](https://github.com/MrRobotProgrammer/php-teste/tree/classes-de-equivalencia)"
+
+    -   Sobre classes de equivalência do mundo de testes, que descrevem similaridades entre os cenários de testes
+        *   Isto é importante para descobrir quantos testes devemos criar
+        *   A ideia é criar nenhum teste a mais ou a menos
+        *   Um teste também é um código que precisa ser mantido
+    -   Para ordenar uma lista, você pode usar a função usort
+    - Para fatiar uma lista, você pode usar a função array_slice
