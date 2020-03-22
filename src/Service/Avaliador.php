@@ -9,6 +9,7 @@ class Avaliador
 {
     private $maiorLance = -INF;
     private $menorValor = INF;
+    private $maioresLances;
 
     public function avaliar(Leilao $leilao): void
     {
@@ -22,9 +23,17 @@ class Avaliador
 
             }
         }
+
+        $lances = $leilao->getLances();
+        usort($lances, function (Lance $lance1, Lance $lance2) {
+            return $lance2->getValor() - $lance1->getValor();
+        });
+
+        $this->maioresLances = array_slice($lances, 0, 3);
     }
 
-    /**Undocumented functionUndocumented function
+
+    /**
      * Retorna maior valor do lance
      *
      * @return float
@@ -42,5 +51,15 @@ class Avaliador
     public function getMenorValor(): float 
     {
 		return $this->menorValor;
-	}
+    }
+    
+    /**
+     * Retorna um array de Lances
+     *
+     * @return array
+     */
+    public function getMaioresLances() : array
+    {
+        return $this->maioresLances;
+    }
 }

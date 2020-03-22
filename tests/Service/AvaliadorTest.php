@@ -6,6 +6,7 @@ use Alura\Leilao\Model\Lance;
 use Alura\Leilao\Model\Leilao;
 use Alura\Leilao\Model\Usuario;
 use Alura\Leilao\Service\Avaliador;
+use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
 class AvaliadorTest extends TestCase
@@ -101,5 +102,33 @@ class AvaliadorTest extends TestCase
         // Assert - Then / Verificamos se a saída é a esperada
        
         $this->assertEquals(500, $menorValor);
+    }
+
+    public function testavaliadorDeveBuscar3MaioresValores()
+    {
+        // Arrange - Give / Preparamos o cenário do teste
+        $leilao     = new Leilao('Fiat 147 0Km');
+        
+        $maria      = new Usuario('Maria');
+        $joao       = new Usuario('Joao');
+        $jorge      = new Usuario('Jorge') ;
+        $mariana    = new Usuario('Mariana');
+
+        $leilao->recebeLance(new Lance($maria, 2000));
+        $leilao->recebeLance(new Lance($joao, 1500));
+        $leilao->recebeLance(new Lance($jorge, 5000));
+        $leilao->recebeLance(new Lance($mariana, 3000));
+
+        // Act - When / Executamos o código a ser testado
+        $leiloeiro = new Avaliador();
+        $leiloeiro->avaliar($leilao);
+        $maiorValor = $leiloeiro->getMaioresLances();
+
+        // Assert - Then / Verificamos se a saida é a esperada
+        static::assertCount(3, $maiorValor, "retornou tres itens da Array");
+        static::assertEquals(5000, $maiorValor[0]->getValor());
+        static::assertEquals(3000, $maiorValor[1]->getValor());
+        static::assertEquals(2000, $maiorValor[2]->getValor());
+
     }
 }
