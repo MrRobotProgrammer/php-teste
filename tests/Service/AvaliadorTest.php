@@ -20,7 +20,7 @@ class AvaliadorTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->leiloeiro = new Avaliador;
+        $this->leiloeiro = new Avaliador();
     }
 
     /**
@@ -32,72 +32,25 @@ class AvaliadorTest extends TestCase
     public function testAvaliadorVerificandoMaiorLance(Leilao $leilao)
     {
         // Act - When / Executamos o código a ser testado
-        $leiloeiro = new Avaliador();
-        $leiloeiro->avaliar($leilao);
-        $maiorValor = $leiloeiro->getMaiorLance();
+        $this->leiloeiro->avaliar($leilao);
+        $maiorValor = $this->leiloeiro->getMaiorLance();
 
         // Assert - Then / Verificamos se a saída é a esperada
 
         $this->assertEquals(2500, $maiorValor);
     }
-
+    
     /**
      * @dataProvider entregaLeiloes
      *
      * @param Leilao $leilao
      * @return void
      */
-    public function testAvaliadorVerificandoMaiorLanceOrdemDecrescente(Leilao $leilao)
+    public function testAvaliadorVerificandoMenorLance(Leilao $leilao)
     {
         // Act - When / Executamos o código a ser testado
-        $leiloeiro = new Avaliador();
-        $leiloeiro->avaliar($leilao);
-        $maiorValor = $leiloeiro->getMaiorLance();
-
-        // Assert - Then / Verificamos se a saída é a esperada
-
-        $this->assertEquals(2500, $maiorValor);
-    }
-
-    /**
-     * @dataProvider entregaLeiloes
-     *
-     * @param Leilao $leilao
-     * @return void
-     */
-    public function testAvaliadorVerificandoMenorLanceOrdemDecrescente(Leilao $leilao)
-    {
-
-        // Arrange - Given / Preparamos o cenário do teste
-        $leilao = $this->leilaoEmOrdemDecrescente();
-        $leiloeiro = new Avaliador();
-
-        // Act - When / Executamos o código a ser testado
-        $leiloeiro->avaliar($leilao);
-        $menorValor = $leiloeiro->getMenorValor();
-
-        // Assert - Then / Verificamos se a saída é a esperada
-
-        $this->assertEquals(1000, $menorValor);
-    }
-
-    /**
-     * @dataProvider entregaLeiloes
-     *
-     * @param Leilao $leilao
-     * @return void
-     */
-    public function testAvaliadorVerificandoMenorLanceOrdemCrescente(Leilao $leilao)
-    {
-
-        // Arrange - Given / Preparamos o cenário do teste
-        $leilao = $this->leilaoEmOrdemCrescente();
-
-        $leiloeiro = new Avaliador();
-
-        // Act - When / Executamos o código a ser testado
-        $leiloeiro->avaliar($leilao);
-        $menorValor = $leiloeiro->getMenorValor();
+        $this->leiloeiro->avaliar($leilao);
+        $menorValor = $this->leiloeiro->getMenorValor();
 
         // Assert - Then / Verificamos se a saída é a esperada
 
@@ -112,13 +65,9 @@ class AvaliadorTest extends TestCase
      */
     public function testavaliadorDeveBuscar3MaioresValores(Leilao $leilao)
     {
-        // Arrange - Give / Preparamos o cenário do teste
-        $leilao     = $this->leilaoEmOrdemAleartorio();
-
         // Act - When / Executamos o código a ser testado
-        $leiloeiro = new Avaliador();
-        $leiloeiro->avaliar($leilao);
-        $maiorValor = $leiloeiro->getMaioresLances();
+        $this->leiloeiro->avaliar($leilao);
+        $maiorValor = $this->leiloeiro->getMaioresLances();
 
         // Assert - Then / Verificamos se a saida é a esperada
         static::assertCount(3, $maiorValor, "retornou tres itens da Array");
