@@ -11,19 +11,20 @@ use PHPUnit\Framework\TestCase;
 
 class AvaliadorTest extends TestCase
 {
-    public function testAvaliadorVerificandoMaiorLanceOrdemCrescente()
+    /**
+     * Object Avaliador
+     *
+     * @var Avaliador
+     */
+    private $leiloeiro;
+
+    protected function setUp(): void
     {
-
-        // Arrange - Given / Preparamos o cenário do teste
-        $leilao = new Leilao('FIAT 147 0km');
-
-        $maria = new Usuario('maria');
-        $joao  = new Usuario('joao');
-
-        $leilao->recebeLance(new Lance($joao, 2500));
-        $leilao->recebeLance(new Lance($maria, 10000));
-        $leilao->recebeLance(new Lance($maria, 15000));
-
+        $this->leiloeiro = new Avaliador;
+    }
+    public function testAvaliadorVerificandoMaiorLance()
+    {
+        $leilao = $this->leilaoEmOrdemCrescente();
         $leiloeiro = new Avaliador();
 
         // Act - When / Executamos o código a ser testado
@@ -32,20 +33,14 @@ class AvaliadorTest extends TestCase
 
         // Assert - Then / Verificamos se a saída é a esperada
 
-        $this->assertEquals(15000, $maiorValor);
+        $this->assertEquals(2500, $maiorValor);
     }
 
     public function testAvaliadorVerificandoMaiorLanceOrdemDecrescente()
     {
 
         // Arrange - Given / Preparamos o cenário do teste
-        $leilao = new Leilao('FIAT 147 0km');
-
-        $maria = new Usuario('maria');
-        $joao  = new Usuario('joao');
-
-        $leilao->recebeLance(new Lance($maria, 10000));
-        $leilao->recebeLance(new Lance($joao, 2500));
+        $leilao = $this->leilaoEmOrdemDecrescente();
 
         $leiloeiro = new Avaliador();
 
@@ -54,22 +49,15 @@ class AvaliadorTest extends TestCase
         $maiorValor = $leiloeiro->getMaiorLance();
 
         // Assert - Then / Verificamos se a saída é a esperada
-       
-        $this->assertEquals(10000, $maiorValor);
+
+        $this->assertEquals(2500, $maiorValor);
     }
 
     public function testAvaliadorVerificandoMenorLanceOrdemDecrescente()
     {
 
         // Arrange - Given / Preparamos o cenário do teste
-        $leilao = new Leilao('FIAT 147 0km');
-
-        $maria = new Usuario('maria');
-        $joao  = new Usuario('joao');
-
-        $leilao->recebeLance(new Lance($maria, 10000));
-        $leilao->recebeLance(new Lance($joao, 2500));
-
+        $leilao = $this->leilaoEmOrdemDecrescente();
         $leiloeiro = new Avaliador();
 
         // Act - When / Executamos o código a ser testado
@@ -77,21 +65,15 @@ class AvaliadorTest extends TestCase
         $menorValor = $leiloeiro->getMenorValor();
 
         // Assert - Then / Verificamos se a saída é a esperada
-       
-        $this->assertEquals(2500, $menorValor);
+
+        $this->assertEquals(1000, $menorValor);
     }
 
     public function testAvaliadorVerificandoMenorLanceOrdemCrescente()
     {
 
         // Arrange - Given / Preparamos o cenário do teste
-        $leilao = new Leilao('FIAT 147 0km');
-
-        $maria = new Usuario('maria');
-        $joao  = new Usuario('joao');
-
-        $leilao->recebeLance(new Lance($joao, 500));
-        $leilao->recebeLance(new Lance($maria, 10000));
+        $leilao = $this->leilaoEmOrdemCrescente();
 
         $leiloeiro = new Avaliador();
 
@@ -100,24 +82,14 @@ class AvaliadorTest extends TestCase
         $menorValor = $leiloeiro->getMenorValor();
 
         // Assert - Then / Verificamos se a saída é a esperada
-       
-        $this->assertEquals(500, $menorValor);
+
+        $this->assertEquals(1000, $menorValor);
     }
 
     public function testavaliadorDeveBuscar3MaioresValores()
     {
         // Arrange - Give / Preparamos o cenário do teste
-        $leilao     = new Leilao('Fiat 147 0Km');
-        
-        $maria      = new Usuario('Maria');
-        $joao       = new Usuario('Joao');
-        $jorge      = new Usuario('Jorge') ;
-        $mariana    = new Usuario('Mariana');
-
-        $leilao->recebeLance(new Lance($maria, 2000));
-        $leilao->recebeLance(new Lance($joao, 1500));
-        $leilao->recebeLance(new Lance($jorge, 5000));
-        $leilao->recebeLance(new Lance($mariana, 3000));
+        $leilao     = $this->leilaoEmOrdemAleartorio();
 
         // Act - When / Executamos o código a ser testado
         $leiloeiro = new Avaliador();
@@ -126,9 +98,53 @@ class AvaliadorTest extends TestCase
 
         // Assert - Then / Verificamos se a saida é a esperada
         static::assertCount(3, $maiorValor, "retornou tres itens da Array");
-        static::assertEquals(5000, $maiorValor[0]->getValor());
-        static::assertEquals(3000, $maiorValor[1]->getValor());
-        static::assertEquals(2000, $maiorValor[2]->getValor());
+        static::assertEquals(2500, $maiorValor[0]->getValor());
+        static::assertEquals(1500, $maiorValor[1]->getValor());
+        static::assertEquals(1000, $maiorValor[2]->getValor());
+    }
 
+    public function leilaoEmOrdemCrescente()
+    {
+        // Arrange - Given / Preparamos o cenário do teste
+        $leilao     = new Leilao('FIAT 147 0km');
+        $maria      = new Usuario('maria');
+        $joao       = new Usuario('joao');
+        $henrique   = new Usuario('Henrique');
+
+        $leilao->recebeLance(new Lance($maria, 1000));
+        $leilao->recebeLance(new Lance($henrique, 1500));
+        $leilao->recebeLance(new Lance($joao, 2500));
+
+        return $leilao;
+    }
+
+    public function leilaoEmOrdemDecrescente()
+    {
+        // Arrange - Given / Preparamos o cenário do teste
+        $leilao     = new Leilao('FIAT 147 0km');
+        $maria      = new Usuario('maria');
+        $joao       = new Usuario('joao');
+        $henrique   = new Usuario('Henrique');
+
+        $leilao->recebeLance(new Lance($joao, 2500));
+        $leilao->recebeLance(new Lance($henrique, 1500));
+        $leilao->recebeLance(new Lance($maria, 1000));
+
+        return $leilao;
+    }
+
+    public function leilaoEmOrdemAleartorio()
+    {
+        // Arrange - Given / Preparamos o cenário do teste
+        $leilao     = new Leilao('FIAT 147 0km');
+        $maria      = new Usuario('maria');
+        $joao       = new Usuario('joao');
+        $henrique   = new Usuario('Henrique');
+
+        $leilao->recebeLance(new Lance($maria, 1000));
+        $leilao->recebeLance(new Lance($joao, 2500));
+        $leilao->recebeLance(new Lance($henrique, 1500));
+
+        return $leilao;
     }
 }
