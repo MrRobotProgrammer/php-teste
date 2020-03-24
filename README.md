@@ -32,3 +32,12 @@
         *   Um teste também é um código que precisa ser mantido
     -   Para ordenar uma lista, você pode usar a função usort
     - Para fatiar uma lista, você pode usar a função array_slice
+
+************************************************************************************************
+- branch "[organizing_tests](https://github.com/MrRobotProgrammer/php-teste/tree/organizing_tests)"
+
+    -   Sobre Data Providers, os provedores de dados permitem que "alimentemos" os testes com cenários diversos, sem repetir o código e os asserts
+    -   Que existe um método setUp, que é chamado antes de cada testes
+    -   Que os provedores de dados sempre são executados antes do método setup
+    -   Que caso queiramos executar algum código antes dos provedores de dados, existe o método setUpBeforeClass
+    -   Que, análogo ao setUp e setUpBeforeClass, existem os métodos tearDown e tearDownAfterClass, para executar um código após os testes
