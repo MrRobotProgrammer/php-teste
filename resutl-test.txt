@@ -1,0 +1,11 @@
+Avaliador (Alura\Leilao\tests\Service\Avaliador)
+ [x] Avaliador verificando maior lance with data set "ordem-crescente"
+ [x] Avaliador verificando maior lance with data set "ordem-deCrescente"
+ [x] Avaliador verificando maior lance with data set "ordem-aleartorio"
+ [x] Avaliador verificando menor lance with data set "ordem-crescente"
+ [x] Avaliador verificando menor lance with data set "ordem-deCrescente"
+ [x] Avaliador verificando menor lance with data set "ordem-aleartorio"
+ [ ] Avaliador deve buscar 3 maiores valores with data set "ordem-crescente"
+ [ ] Avaliador deve buscar 3 maiores valores with data set "ordem-deCrescente"
+ [ ] Avaliador deve buscar 3 maiores valores with data set "ordem-aleartorio"
+
