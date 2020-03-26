@@ -6,7 +6,7 @@ class Leilao
 {
     /** @var Lance[] */
     private $lances;
-    
+
     /** @var string */
     private $descricao;
 
@@ -16,8 +16,11 @@ class Leilao
         $this->lances = [];
     }
 
-    public function recebeLance(Lance $lance): void
+    public function recebeLance(Lance $lance)
     {
+        if (!empty($this->lances) && $lance->getUsuario() == $this->ehUltimoUsuario($lance)) {
+            return;
+        }
         $this->lances[] = $lance;
     }
 
@@ -27,5 +30,11 @@ class Leilao
     public function getLances(): array
     {
         return $this->lances;
+    }
+
+    private function ehUltimoUsuario(Lance $lance)
+    {
+        $ultimoLance = $this->lances[count($this->lances) - 1];
+        return $lance->getUsuario() == $ultimoLance->getUsuario();
     }
 }
