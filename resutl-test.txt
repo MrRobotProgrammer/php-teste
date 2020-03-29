@@ -1,4 +1,5 @@
 Leilao (Alura\Leilao\tests\Models\Leilao)
+ [x] Leilao nao pode receber mais de 5 lances por usuario
  [x] Leilao nao deve receber lances repetidos
  [x] Leilao deve receber lances with data set "2- Lances"
  [x] Leilao deve receber lances with data set "1- Lances"
