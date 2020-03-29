@@ -41,3 +41,15 @@
     -   Que os provedores de dados sempre são executados antes do método setup
     -   Que caso queiramos executar algum código antes dos provedores de dados, existe o método setUpBeforeClass
     -   Que, análogo ao setUp e setUpBeforeClass, existem os métodos tearDown e tearDownAfterClass, para executar um código após os testes
+
+************************************************************************************************
+- branch "[test-drive-development](https://github.com/MrRobotProgrammer/php-teste/tree/test-drive-development)"
+
+    -   Sobre TDD, o Test Driven Development
+    -   Que o TDD define um ciclo de desenvolvimento guiado pelo teste:
+        *   Escrevemos um teste, que ainda não vai passar
+        *   Implementamos a funcionalidade, que faz o teste passar
+        *   Refatoramos (melhoramos, simplificamos) o código
+    -   Que o TDD ajuda que tenhamos um teste para cada funcionalidade
+        *   Ele também documenta e simplifica classe
+    -   Que devemos implementar a funcionalidade em pequenos passos, chamados de baby steps, sempre guiados pelos testes
