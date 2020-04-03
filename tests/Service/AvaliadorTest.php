@@ -6,6 +6,8 @@ use Alura\Leilao\Model\Lance;
 use Alura\Leilao\Model\Leilao;
 use Alura\Leilao\Model\Usuario;
 use Alura\Leilao\Service\Avaliador;
+use BadFunctionCallException;
+use phpDocumentor\Reflection\Types\Object_;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
@@ -23,6 +25,7 @@ class AvaliadorTest extends TestCase
         $this->leiloeiro = new Avaliador();
     }
 
+   
     /**
      * @dataProvider entregaLeiloes
      *
@@ -39,7 +42,7 @@ class AvaliadorTest extends TestCase
 
         $this->assertEquals(2500, $maiorValor);
     }
-    
+
     /**
      * @dataProvider entregaLeiloes
      *
@@ -76,7 +79,10 @@ class AvaliadorTest extends TestCase
         static::assertEquals(1000, $maiorValor[2]->getValor());
     }
 
-    public function leilaoEmOrdemCrescente()
+    /**
+     * @return Object
+     */
+    public function leilaoEmOrdemCrescente(): Object
     {
         // Arrange - Given / Preparamos o cenário do teste
         $leilao     = new Leilao('FIAT 147 0km');
@@ -91,7 +97,10 @@ class AvaliadorTest extends TestCase
         return $leilao;
     }
 
-    public function leilaoEmOrdemDecrescente()
+    /**
+     * @return Object
+     */
+    public function leilaoEmOrdemDecrescente(): Object
     {
         // Arrange - Given / Preparamos o cenário do teste
         $leilao     = new Leilao('FIAT 147 0km');
@@ -106,7 +115,10 @@ class AvaliadorTest extends TestCase
         return $leilao;
     }
 
-    public function leilaoEmOrdemAleartorio()
+    /**
+     * @return Object
+     */
+    public function leilaoEmOrdemAleartorio(): object
     {
         // Arrange - Given / Preparamos o cenário do teste
         $leilao     = new Leilao('FIAT 147 0km');
@@ -121,12 +133,26 @@ class AvaliadorTest extends TestCase
         return $leilao;
     }
 
-    public function entregaLeiloes()
+    /**
+     * @return array
+     */
+    public function entregaLeiloes(): array
     {
         return [
             "ordem-crescente"   => [$this->leilaoEmOrdemCrescente()],
             "ordem-deCrescente" => [$this->leilaoEmOrdemDecrescente()],
-            "ordem-aleartorio"  => [$this->leilaoEmOrdemAleartorio()]            
+            "ordem-aleartorio"  => [$this->leilaoEmOrdemAleartorio()]
         ];
+    }
+
+    /**
+     * @return void
+     */
+    public function testLeilaoVazioNaoPodeSerAvalido()
+    {
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage('Não é possível avaliar o leilão');
+        $leilao = new Leilao('Fusca Azul');
+        $this->leiloeiro->avaliar($leilao);
     }
 }
