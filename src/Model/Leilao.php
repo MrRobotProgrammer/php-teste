@@ -2,6 +2,8 @@
 
 namespace Alura\Leilao\Model;
 
+use phpDocumentor\Reflection\DocBlock\Tags\Throws;
+
 class Leilao
 {
     /** @var Lance[] */
@@ -25,12 +27,12 @@ class Leilao
     public function recebeLance(Lance $lance)
     {
         if (!empty($this->lances) && $lance->getUsuario() == $this->ehUltimoUsuario($lance)) {
-            return;
+            throw new \DomainException('Usuario não pode fazer dois lances seguidos');
         }
 
         $quantidadeLanceUsuarios = $this->quantidadeLancesPorUsuario($lance->getUsuario());
         if ($quantidadeLanceUsuarios >= 5) {
-            return;
+            throw new \DomainException('Usuarios não pode fazer mais de 5 lances no mesmo leilao');
         }
 
         $this->lances[] = $lance;
