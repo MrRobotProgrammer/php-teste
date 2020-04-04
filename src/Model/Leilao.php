@@ -20,7 +20,6 @@ class Leilao
         $this->descricao = $descricao;
         $this->lances = [];
         $this->finaliza = false;
-        
     }
     /**
      * Recebe o lance
@@ -30,11 +29,12 @@ class Leilao
      */
     public function recebeLance(Lance $lance)
     {
-        if (!empty($this->lances) && $lance->getUsuario() == $this->ehUltimoUsuario($lance)) {
+        if (!empty($this->lances) && $this->ehUltimoUsuario($lance)) {
             throw new \DomainException('Usuario não pode fazer dois lances seguidos');
         }
 
-        $quantidadeLanceUsuarios = $this->quantidadeLancesPorUsuario($lance->getUsuario());
+        $quantidadeLanceUsuarios = $this
+            ->quantidadeLancesPorUsuario($lance->getUsuario());
         if ($quantidadeLanceUsuarios >= 5) {
             throw new \DomainException('Usuarios não pode fazer mais de 5 lances no mesmo leilao');
         }
@@ -79,7 +79,7 @@ class Leilao
     /**
      * @return void
      */
-    public function finaliza()
+    public function finalizar()
     {
         $this->finaliza = true;
     }

@@ -171,7 +171,7 @@ class AvaliadorTest extends TestCase
         $leilao = new Leilao('Fiat 147 oKm');
         $maria = new Usuario('Maria');
         $leilao->recebeLance(new Lance($maria, 1000));
-        $leilao->finaliza();
+        $leilao->finalizar();
 
         $this->leiloeiro->avaliar($leilao);
     }
