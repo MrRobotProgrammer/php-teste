@@ -53,3 +53,11 @@
     -   Que o TDD ajuda que tenhamos um teste para cada funcionalidade
         *   Ele também documenta e simplifica classe
     -   Que devemos implementar a funcionalidade em pequenos passos, chamados de baby steps, sempre guiados pelos testes
+
+************************************************************************************************
+- branch "[test-exceptions](https://github.com/MrRobotProgrammer/php-teste/tree/test-exceptions)"
+    -   Como verificar que o código lança as exceções esperadas
+        *   Em geral, exceções também fazem parte das regras de negócio e precisam ser verificadas
+        *   Para tal o PHPUnit oferece os métodos expectException e expectExceptionMessage da classe TestCase:
+            *   expectException(\NomeDaExcecao::class)
+            *   expectExceptionMessage(mensagemDeExcecao)
