@@ -11,8 +11,12 @@ class Avaliador
     private $menorValor = INF;
     private $maioresLances;
 
+
     public function avaliar(Leilao $leilao): void
     {
+        if ($leilao->estaFinalizado()) {
+            throw new \DomainException('Leilão já finalizado');
+        }
         if (empty($leilao->getLances())) {
             throw new \DomainException('Não é possível avaliar o leilão');
         }

@@ -25,7 +25,7 @@ class AvaliadorTest extends TestCase
         $this->leiloeiro = new Avaliador();
     }
 
-   
+
     /**
      * @dataProvider entregaLeiloes
      *
@@ -80,6 +80,7 @@ class AvaliadorTest extends TestCase
     }
 
     /**
+     * DataProvider
      * @return Object
      */
     public function leilaoEmOrdemCrescente(): Object
@@ -98,6 +99,7 @@ class AvaliadorTest extends TestCase
     }
 
     /**
+     * DataProvider
      * @return Object
      */
     public function leilaoEmOrdemDecrescente(): Object
@@ -116,6 +118,7 @@ class AvaliadorTest extends TestCase
     }
 
     /**
+     * DataProvider
      * @return Object
      */
     public function leilaoEmOrdemAleartorio(): object
@@ -134,6 +137,7 @@ class AvaliadorTest extends TestCase
     }
 
     /**
+     * DataProvider
      * @return array
      */
     public function entregaLeiloes(): array
@@ -153,6 +157,22 @@ class AvaliadorTest extends TestCase
         $this->expectException(\DomainException::class);
         $this->expectExceptionMessage('Não é possível avaliar o leilão');
         $leilao = new Leilao('Fusca Azul');
+        $this->leiloeiro->avaliar($leilao);
+    }
+
+    /**
+     * @return void
+     */
+    public function testLeilaoFinalizadoNaoPodeSerAvaliado()
+    {
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage('Leilão já finalizado');
+
+        $leilao = new Leilao('Fiat 147 oKm');
+        $maria = new Usuario('Maria');
+        $leilao->recebeLance(new Lance($maria, 1000));
+        $leilao->finaliza();
+
         $this->leiloeiro->avaliar($leilao);
     }
 }

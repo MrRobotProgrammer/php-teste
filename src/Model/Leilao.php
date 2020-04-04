@@ -12,12 +12,16 @@ class Leilao
     /** @var string */
     private $descricao;
 
+    /** @var bool */
+    private $finaliza;
+
     public function __construct(string $descricao)
     {
         $this->descricao = $descricao;
         $this->lances = [];
+        $this->finaliza = false;
+        
     }
-
     /**
      * Recebe o lance
      *
@@ -70,5 +74,21 @@ class Leilao
             },
             0
         );
+    }
+
+    /**
+     * @return void
+     */
+    public function finaliza()
+    {
+        $this->finaliza = true;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function estaFinalizado(): bool
+    {
+        return $this->finaliza;
     }
 }
